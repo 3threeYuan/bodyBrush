@@ -61,17 +61,17 @@ function gotPoses(poses) {
     rightWristX = poses[0].pose.keypoints[10].position.x;
     rightWristY = poses[0].pose.keypoints[10].position.y;
     
-    // Update left wrist position
-    leftWristX = poses[0].pose.keypoints[9].position.x;
-    leftWristY = poses[0].pose.keypoints[9].position.y;
+    // // Update left wrist position
+    // leftWristX = poses[0].pose.keypoints[9].position.x;
+    // leftWristY = poses[0].pose.keypoints[9].position.y;
 
-    // Update right ankle position
-    rightAnkleX = poses[0].pose.keypoints[16].position.x;
-    rightAnkleY = poses[0].pose.keypoints[16].position.y;
+    // // Update right ankle position
+    // rightAnkleX = poses[0].pose.keypoints[16].position.x;
+    // rightAnkleY = poses[0].pose.keypoints[16].position.y;
 
-    // Update left ankle position
-    leftAnkleX = poses[0].pose.keypoints[15].position.x;
-    leftAnkleY = poses[0].pose.keypoints[15].position.y;
+    // // Update left ankle position
+    // leftAnkleX = poses[0].pose.keypoints[15].position.x;
+    // leftAnkleY = poses[0].pose.keypoints[15].position.y;
   }
 }
 
