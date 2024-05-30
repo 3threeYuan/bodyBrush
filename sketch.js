@@ -38,10 +38,10 @@ function setup() {
   video.hide();
   
   // Initialize paths
-  rightWristPath = new Path(255, 0, 0); // Red path for right wrist
-  leftWristPath = new Path(0, 255, 0); // Green path for left wrist
-  rightAnklePath = new Path(0, 0, 255); // Blue path for right ankle
-  leftAnklePath = new Path(255, 255, 0); // Yellow path for left ankle
+  rightWristPath = new Path(255,255,255); // Red path for right wrist
+  leftWristPath = new Path(255,255,255); // Green path for left wrist
+  rightAnklePath = new Path(255,255,255); // Blue path for right ankle
+  leftAnklePath = new Path(255,255,255); // Yellow path for left ankle
   
   // Create a save button
   saveButton = createButton('Save Drawing');
