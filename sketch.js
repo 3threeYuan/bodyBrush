@@ -5,28 +5,14 @@ let poseNet;
 let rightWristX = 0;
 let rightWristY = 0;
 
-// Left wrist
-let leftWristX = 0;
-let leftWristY = 0;
-
-// Right ankle
-let rightAnkleX = 0;
-let rightAnkleY = 0;
-
-// Left ankle
-let leftAnkleX = 0;
-let leftAnkleY = 0;
-
-// Paths for each body part
-let rightWristPath;
-let leftWristPath;
-let rightAnklePath;
-let leftAnklePath;
+// Paths for the right wrist
+let rightWristPath1;
+let rightWristPath2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   video = createCapture(VIDEO);
-  video.size(width, height);
+  video.size(width / 2, height);
 
   // Create a new poseNet method with a single detection
   poseNet = ml5.poseNet(video, modelReady);
@@ -38,40 +24,22 @@ function setup() {
   video.hide();
   
   // Initialize paths
-  rightWristPath = new Path(255,255,255); // Red path for right wrist
-  leftWristPath = new Path(255,255,255); // Green path for left wrist
-  rightAnklePath = new Path(255,255,255); // Blue path for right ankle
-  leftAnklePath = new Path(255,255,255); // Yellow path for left ankle
+  rightWristPath1 = new Path(255, 255, 255); // White path for right wrist
+  rightWristPath2 = new Path(255, 255, 255); // White path for right wrist on the black background
   
   // Create a save button
   saveButton = createButton('Save Drawing');
-  saveButton.position(10, height-30 );
+  saveButton.position(10, height - 30);
 
   // Add a mousePressed event listener to the button
   saveButton.mousePressed(saveDrawing);
-
-
 }
 
 function gotPoses(poses) {
-  //console.log(poses);
   if (poses.length > 0) {
-    
     // Update right wrist position
-    rightWristX = poses[0].pose.keypoints[10].position.x;
+    rightWristX = poses[0].pose.keypoints[10].position.x / 2;
     rightWristY = poses[0].pose.keypoints[10].position.y;
-    
-    // // Update left wrist position
-    // leftWristX = poses[0].pose.keypoints[9].position.x;
-    // leftWristY = poses[0].pose.keypoints[9].position.y;
-
-    // // Update right ankle position
-    // rightAnkleX = poses[0].pose.keypoints[16].position.x;
-    // rightAnkleY = poses[0].pose.keypoints[16].position.y;
-
-    // // Update left ankle position
-    // leftAnkleX = poses[0].pose.keypoints[15].position.x;
-    // leftAnkleY = poses[0].pose.keypoints[15].position.y;
   }
 }
 
@@ -80,29 +48,22 @@ function modelReady() {
 }
 
 function draw() {
-  // Draw video on canvas
-  image(video, 0, 0, width, height);
+  // Draw black background for the whole canvas
+  background(0);
+
+  // Draw video on the left half of the canvas
+  image(video, 0, 0, width / 2, height);
   
-  // Add current positions to paths for each body part
-  rightWristPath.add(rightWristX, rightWristY);
-  leftWristPath.add(leftWristX, leftWristY);
-  rightAnklePath.add(rightAnkleX, rightAnkleY);
-  leftAnklePath.add(leftAnkleX, leftAnkleY);
+  // Add current positions to paths for right wrist
+  rightWristPath1.add(rightWristX - width / 4, rightWristY - height / 2);
+  rightWristPath2.add(rightWristX + width / 4, rightWristY - height / 2);
   
   // Update and display each path
-  rightWristPath.update();
-  rightWristPath.display();
+  rightWristPath1.update();
+  rightWristPath1.display();
   
-  leftWristPath.update();
-  leftWristPath.display();
-  
-  rightAnklePath.update();
-  rightAnklePath.display();
-  
-  leftAnklePath.update();
-  leftAnklePath.display();
-
-
+  rightWristPath2.update();
+  rightWristPath2.display();
 }
 
 // Path class
@@ -110,7 +71,6 @@ class Path {
   constructor(r, g, b) {
     this.color = color(r, g, b);
     this.path = [];
-    this.path.push(createVector(width/2, 0)); // Start path
   }
   
   add(x, y) {
@@ -138,7 +98,7 @@ class Path {
     
     beginShape();
     for (let i = 0; i < this.path.length; i++) {
-      vertex(this.path[i].x, this.path[i].y);
+      vertex(this.path[i].x + width / 4, this.path[i].y + height / 2);
     }
     endShape();
   }
@@ -148,10 +108,6 @@ function saveDrawing() {
   save('DrawingData.png');
 }
 
-
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-
 }
-
-
