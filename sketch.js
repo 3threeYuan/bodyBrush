@@ -56,7 +56,7 @@ function draw() {
   
   // Add current positions to paths for right wrist
   rightWristPath1.add(rightWristX - width / 4, rightWristY - height / 2);
-  rightWristPath2.add(rightWristX + width / 4, rightWristY - height / 2);
+  rightWristPath2.add(rightWristX + width / 3, rightWristY - height / 2);
   
   // Update and display each path
   rightWristPath1.update();
@@ -98,7 +98,7 @@ class Path {
     
     beginShape();
     for (let i = 0; i < this.path.length; i++) {
-      vertex(this.path[i].x + width / 4, this.path[i].y + height / 2);
+      vertex(this.path[i].x + width / 3, this.path[i].y + height / 2);
     }
     endShape();
   }
