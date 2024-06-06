@@ -26,13 +26,6 @@ function setup() {
   // Initialize paths
   rightWristPath1 = new Path(255, 255, 255); // White path for right wrist
   rightWristPath2 = new Path(255, 255, 255); // White path for right wrist on the black background
-  
-  // Create a save button
-  saveButton = createButton('Save Drawing');
-  saveButton.position(10, height - 30);
-
-  // Add a mousePressed event listener to the button
-  saveButton.mousePressed(saveDrawing);
 }
 
 function gotPoses(poses) {
@@ -101,6 +94,12 @@ class Path {
       vertex(this.path[i].x + width / 3, this.path[i].y + height / 2);
     }
     endShape();
+  }
+}
+
+function keyPressed() {
+  if (key === '1') {
+    saveDrawing();
   }
 }
 
